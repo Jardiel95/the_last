@@ -74,21 +74,11 @@
     </p>
   </header>
 
-  <!-- Seção do Player de Música: Trilha Aconchegante e Funcional -->
-  <section class="relative z-10 max-w-xl mx-auto px-4 mb-14">
-    <div class="glass-card rounded-2xl p-6 text-center purple-glow border border-purple-500/30">
-      <div class="flex items-center justify-center gap-3 mb-3 text-purple-300">
-        <i data-lucide="music" class="w-6 h-6 animate-pulse"></i>
-        <span class="font-semibold text-lg">Coração com Buraquinhos (Trilha Aconchegante)</span>
-      </div>
-      <p class="text-xs text-purple-300/70 mb-5">
-        Uma melodia suave em piano e caixinha de música criada especialmente para acompanhar esta leitura.
-      </p>
-      
-      <button id="audio-toggle-btn" onclick="toggleAudio()" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800 text-white font-semibold flex items-center justify-center gap-3 shadow-lg shadow-purple-900/50 hover:scale-105 transition transform">
-        <i id="audio-icon" data-lucide="play" class="w-5 h-5"></i>
-        <span id="audio-text">Tocar Trilha Aconchegante</span>
-      </button>
+  <!-- Indicador Discreto da Trilha Sonora -->
+  <section class="relative z-10 max-w-xl mx-auto px-4 mb-10">
+    <div class="glass-card rounded-2xl p-4 text-center purple-glow border border-purple-500/30 flex items-center justify-center gap-3">
+      <i data-lucide="music" class="w-5 h-5 text-purple-300 animate-pulse"></i>
+      <span class="text-xs text-purple-300/80">Trilha sonora aconchegante tocando ao fundo...</span>
     </div>
   </section>
 
@@ -199,11 +189,11 @@
       
       <h3 class="font-serif-title text-2xl text-purple-200 mb-2">Parabéns, Julia!</h3>
       <p class="text-sm text-purple-300/90 mb-6">
-        "Se existe um buraco no coração, a gente preenche com as memórias boas e com o desejo sincero de ver quem a gente ama feliz."
+        "O amor verdadeiro não exige posse; ele apenas deseja a felicidade do outro, mesmo que de longe."
       </p>
 
       <div class="p-4 bg-purple-950/60 rounded-xl text-xs text-purple-300 leading-relaxed mb-6">
-        Você foi o meu último ato de amar. Onde quer que você esteja, saiba que existe alguém aqui torcendo por você a cada segundo. Feliz Aniversário!
+        Você foi o meu último ato de amar, não pretendo me relacionar de novo com mais ninguém. Onde quer que você esteja, saiba que existe alguém aqui torcendo por você a cada segundo. Feliz Aniversário!
       </div>
 
       <p class="font-cursive text-3xl text-purple-300">Sempre com carinho, Jota</p>
@@ -250,27 +240,27 @@
       document.getElementById('special-modal').classList.add('hidden');
     }
 
-    // Sintetizador Aconchegante de Áudio Nativo (Web Audio API)
+    // Sintetizador Aconchegante de Áudio Nativo Autoplay (Web Audio API)
     let audioCtx = null;
     let isPlaying = false;
     let timerId = null;
 
-    // Frequências das notas da melodia de Chiquititas (Coração com Buraquinhos - Suave)
+    // Melodia Aconchegante em Arpejo Suave
     const melody = [
-      { note: 261.63, duration: 0.6 }, // Dó
-      { note: 293.66, duration: 0.6 }, // Ré
-      { note: 329.63, duration: 0.8 }, // Mi
-      { note: 261.63, duration: 0.6 }, // Dó
-      { note: 329.63, duration: 0.8 }, // Mi
-      { note: 349.23, duration: 0.6 }, // Fá
-      { note: 329.63, duration: 0.6 }, // Mi
-      { note: 293.66, duration: 1.0 }, // Ré
+      { note: 220.00, duration: 0.8 }, // Lá
+      { note: 261.63, duration: 0.8 }, // Dó
+      { note: 329.63, duration: 1.0 }, // Mi
+      { note: 392.00, duration: 1.2 }, // Sol
       
-      { note: 220.00, duration: 0.6 }, // Lá
-      { note: 261.63, duration: 0.6 }, // Dó
-      { note: 293.66, duration: 0.8 }, // Ré
-      { note: 246.94, duration: 0.6 }, // Si
-      { note: 261.63, duration: 1.2 }  // Dó
+      { note: 174.61, duration: 0.8 }, // Fá
+      { note: 220.00, duration: 0.8 }, // Lá
+      { note: 261.63, duration: 1.0 }, // Dó
+      { note: 329.63, duration: 1.2 }, // Mi
+
+      { note: 196.00, duration: 0.8 }, // Sol
+      { note: 246.94, duration: 0.8 }, // Si
+      { note: 293.66, duration: 1.0 }, // Ré
+      { note: 349.23, duration: 1.2 }  // Fá
     ];
 
     let noteIndex = 0;
@@ -281,12 +271,11 @@
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
-      osc.type = 'sine'; // Som suave de caixinha de música / piano aconchegante
+      osc.type = 'sine'; // Timbre suave e aconchegante
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-      // Rampa suave de volume para não dar estalos
       gain.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.08);
+      gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.1);
       gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration - 0.05);
 
       osc.connect(gain);
@@ -306,9 +295,8 @@
       timerId = setTimeout(scheduleMelody, current.duration * 1000);
     }
 
-    function toggleAudio() {
-      const btnText = document.getElementById('audio-text');
-      const btnIcon = document.getElementById('audio-icon');
+    function startBackgroundAudio() {
+      if (isPlaying) return;
 
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -318,20 +306,25 @@
         audioCtx.resume();
       }
 
-      if (!isPlaying) {
-        isPlaying = true;
-        btnText.innerText = 'Pausar Trilha Aconchegante';
-        btnIcon.setAttribute('data-lucide', 'pause');
-        lucide.createIcons();
-        scheduleMelody();
-      } else {
-        isPlaying = false;
-        clearTimeout(timerId);
-        btnText.innerText = 'Tocar Trilha Aconchegante';
-        btnIcon.setAttribute('data-lucide', 'play');
-        lucide.createIcons();
-      }
+      isPlaying = true;
+      scheduleMelody();
     }
+
+    // Tentar iniciar automaticamente e ativar no primeiro toque caso o navegador bloqueie
+    window.addEventListener('DOMContentLoaded', () => {
+      startBackgroundAudio();
+      
+      const enableAudioOnInteraction = () => {
+        startBackgroundAudio();
+        window.removeEventListener('click', enableAudioOnInteraction);
+        window.removeEventListener('touchstart', enableAudioOnInteraction);
+        window.removeEventListener('scroll', enableAudioOnInteraction);
+      };
+
+      window.addEventListener('click', enableAudioOnInteraction);
+      window.addEventListener('touchstart', enableAudioOnInteraction);
+      window.addEventListener('scroll', enableAudioOnInteraction);
+    });
   </script>
 </body>
 </html>
