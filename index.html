@@ -76,52 +76,61 @@
 
   <!-- Indicador Discreto da Trilha Sonora -->
   <section class="relative z-10 max-w-xl mx-auto px-4 mb-10">
-    <i data-lucide="music" class="w-5 h-5 text-purple-300 animate-pulse"></i>
+    <div class="glass-card rounded-2xl p-4 text-center purple-glow border border-purple-500/30 flex items-center justify-center gap-3">
+      <i data-lucide="music" class="w-5 h-5 text-purple-300 animate-pulse"></i>
+      <span class="text-xs text-purple-300/80">Trilha sonora aconchegante tocando ao fundo...</span>
+    </div>
   </section>
 
   <main class="relative z-10 max-w-3xl mx-auto px-4 space-y-16">
 
-    <!-- Carrossel: Lembranças de Você -->
+    <!-- Carrossel: Lembranças de Você (Formatado para Fotos de Celular / Portrait 9:16) -->
     <section class="glass-card rounded-3xl p-6 md:p-8 purple-glow">
       <div class="flex items-center justify-between mb-6">
         <div>
           <h2 class="font-serif-title text-2xl text-purple-200 font-semibold">Lembranças de Você</h2>
+          <p class="text-xs text-purple-400">Momentos e detalhes seus que nunca saem da minha memória</p>
         </div>
         <i data-lucide="sparkles" class="text-purple-400 w-6 h-6"></i>
       </div>
 
-      <!-- Estrutura do Carrossel -->
-      <div class="relative overflow-hidden rounded-2xl bg-purple-950/40 border border-purple-800/40 aspect-video flex items-center justify-center group">
+      <!-- Estrutura do Carrossel Ajustada para formato de celular (9:16, proporcional sem cortes) -->
+      <div class="relative overflow-hidden rounded-2xl bg-purple-950/60 border border-purple-800/40 aspect-[9/16] max-h-[550px] w-full max-w-sm mx-auto flex items-center justify-center group shadow-2xl">
         
         <!-- Item 1 -->
         <div class="carousel-item active w-full h-full relative">
+          <!-- Imagem de fundo desfocada para preenchimento suave -->
+          <img src="#">
+          <!-- Imagem principal sem cortes em proporção de celular -->
           <img src="j3.jpeg">
-          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center text-sm text-purple-200">
-            O seu sorriso que iluminava até os dias mais difíceis.
+          <div class="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 text-center text-sm text-purple-200">
+            O seu sorriso que deixa meu dia extremamente melhor.
           </div>
         </div>
 
         <!-- Item 2 -->
         <div class="carousel-item w-full h-full relative">
-          <img src="j2.jpeg">
-          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center text-sm text-purple-200">
-            O amor que tem pelos animais, isso é lindo.
+          <img src="#">
+          <img src="j2.jpeg" alt="Foto 2" class="relative z-10 w-full h-full object-contain">
+          <div class="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 text-center text-sm text-purple-200">
+            Sua paixão por animais que eu acho muito lindo.
           </div>
         </div>
 
         <!-- Item 3 -->
         <div class="carousel-item w-full h-full relative">
+          <img src="#">
           <img src="j1.jpeg">
-          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center text-sm text-purple-200">
-            Essa beleza sedutora que me faz lembrar de tudo e mais um pouco.
+          <div class="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 text-center text-sm text-purple-200">
+            Sua beleza sedutora que me hipnotiza feito bobo.
           </div>
         </div>
 
         <!-- Botões de Navegação -->
-        <button onclick="moveCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-purple-950/70 hover:bg-purple-800 text-purple-200 transition">
+        <button onclick="moveCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-purple-950/80 hover:bg-purple-800 text-purple-200 transition backdrop-blur-sm border border-purple-500/30">
           <i data-lucide="chevron-left" class="w-5 h-5"></i>
         </button>
-        <button onclick="moveCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-purple-950/70 hover:bg-purple-800 text-purple-200 transition">
+        <button onclick="moveCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-purple-950/80 hover:bg-purple-800 text-purple-200 transition backdrop-blur-sm border border-purple-500/30">
           <i data-lucide="chevron-right" class="w-5 h-5"></i>
         </button>
       </div>
@@ -302,7 +311,7 @@
       scheduleMelody();
     }
 
-    // Tentar iniciar automaticamente e ativar no primeiro toque caso o navegador bloqueie
+    // Iniciar áudio automaticamente na primeira interação com a página
     window.addEventListener('DOMContentLoaded', () => {
       startBackgroundAudio();
       
